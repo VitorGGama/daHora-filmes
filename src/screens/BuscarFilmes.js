@@ -11,7 +11,7 @@ import SafeContainer from "../components/SafeContainer";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 
-export default function BuscarFilmes() {
+export default function BuscarFilmes({ navigation }) {
   const [filme, setFilme] = useState("");
 
   /* Capturando e registrando em state
@@ -29,7 +29,11 @@ export default function BuscarFilmes() {
       return Alert.alert("Ops!", "Você deve digitar um filme!");
     }
 
-    Alert.alert("Você procurou por:", filme);
+    /* Redirecionando para a tela de Resultados passando
+    o filme para ela através do segundo parâmetro
+    do método navigate. Obs.: não se esqueça de definir
+    a prop navigation no componente. */
+    navigation.navigate("Resultados", { filme });
   };
 
   return (
