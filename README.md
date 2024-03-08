@@ -17,6 +17,11 @@ Exemplo de app nativo multiplataforma criado com React Native e Expo.
 - Instalação da lib **Axios**
 - Configuração/exportação do `services/api-moviedb.js` contendo a programação básica de acesso à API para uso em diferentes partes do app.
 
+#### Exibição dos resultados
+
+- Utilização do componente `FlatList` para listagem dinâmica dos resultados
+- Criação do componente `CardFilme` com uso de prop (`filme`) com carregamento do `title` e do `poster_path` (imagem) de cada filme.
+
 ## Branch 05-desafio--tela-BuscarFilmes
 
 ### Solução: recursos utilizados

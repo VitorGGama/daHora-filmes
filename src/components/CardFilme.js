@@ -1,19 +1,19 @@
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-} from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import imagemAlternativa from "../../assets/images/foto-alternativa.jpg";
 
-export default function CardFilme() {
+export default function CardFilme({ filme }) {
+  /* Extraindo as informações do filme (titulo e imagem de capa) */
+  const { title, poster_path } = filme;
+
   return (
     <View style={estilos.card}>
-      <Image style={estilos.imagem} source={imagemAlternativa} />
+      <Image
+        resizeMode="cover"
+        style={estilos.imagem}
+        source={{ uri: `https://image.tmdb.org/t/p/w500/${poster_path}` }}
+      />
       <View style={estilos.corpo}>
-        <Text style={estilos.titulo}>Nome do filme..</Text>
+        <Text style={estilos.titulo}> {title} </Text>
         <View style={estilos.botoes}>
           <Pressable style={estilos.botao}>
             <Text style={estilos.textoBotao}>Leia mais</Text>
