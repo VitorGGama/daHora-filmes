@@ -3,6 +3,8 @@ import SafeContainer from "../components/SafeContainer";
 import { api, apiKey } from "../services/api-moviedb";
 import { useEffect, useState } from "react";
 import CardFilme from "../components/CardFilme";
+import Separador from "./Separador";
+import EmptyListComponent from "../components/ListaVazia";
 
 /* Prop route
 Prop especial e definida pelo React Navigation.
@@ -42,14 +44,13 @@ export default function Resultados({ route }) {
 
         <View style={estilos.viewFilmes}></View>
         <FlatList
-          // Prop data apontando para o state contendo os dados para a flatlist
           data={resultados}
-          // Extarindoa chave de cada registro/item/filme único
           keyExtractor={(item) => item.id}
-          // Prop que irá renderizar cada item/filme em um componente
           renderItem={({ item }) => {
             return <CardFilme filme={item} />;
           }}
+          ListEmptyComponent={EmptyListComponent}
+          ItemSeparatorComponent={Separador}
         />
       </View>
     </SafeContainer>
