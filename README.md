@@ -2,6 +2,13 @@
 
 Exemplo de app nativo multiplataforma criado com React Native e Expo.
 
+## Branch 07-melhorias-nos-resultados
+
+- Loading usando `ActivityIndicator`
+- Em `Resultados`, aplicamos à `FlatList` componentes personalizados para o caso de não haver filmes na busca (`NaoEncontrado/ListEmptyComponent`) e
+  para separar cada elemento da `FlatList` (`Separador/ItemSeparatorComponent`)
+- Em `CardFilme` colocamos uma condicional para o carregamento de imagem alternativa caso algum filme não tenha imagem, e também ícones nos botões.
+
 ## Branch 06-tela-de-resultados-e-programação-api
 
 ### Resumo
