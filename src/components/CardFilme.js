@@ -1,11 +1,16 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import imagemAlternativa from "../../assets/images/foto-alternativa.jpg";
 import { Ionicons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+
+/* Hook necessário pois não estamos em uma tela com acesso
+à prop navigation */
+import { useNavigation } from "@react-navigation/native";
 
 export default function CardFilme({ filme }) {
-  /* Extraindo as informações do filme (titulo e imagem de capa) */
   const { title, poster_path } = filme;
+
+  /* Acessar recursos de navegação */
+  const navigation = useNavigation();
 
   return (
     <View style={estilos.card}>
@@ -21,16 +26,17 @@ export default function CardFilme({ filme }) {
       <View style={estilos.corpo}>
         <Text style={estilos.titulo}> {title} </Text>
         <View style={estilos.botoes}>
-          <Pressable style={estilos.botao}>
+          <Pressable
+            style={estilos.botao}
+            onPress={() => navigation.navigate("Detalhes", { filme })}
+          >
             <Text style={estilos.textoBotao}>
-              <Entypo name="open-book" size={24} color="black" />
-              Leia mais
+              <Ionicons name="book" size={12} /> Leia mais
             </Text>
           </Pressable>
           <Pressable style={estilos.botao}>
             <Text style={estilos.textoBotao}>
-              <Ionicons name="add-circle" size={24} color="black" />
-              Salvar
+              <Ionicons name="add-circle" size={12} /> Salvar
             </Text>
           </Pressable>
         </View>

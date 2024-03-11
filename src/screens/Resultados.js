@@ -37,6 +37,7 @@ export default function Resultados({ route }) {
             api_key: apiKey,
           },
         });
+        // console.log(resposta.data.results);
         /* Adicionando os resultados ao state*/
         setResultados(resposta.data.results);
 

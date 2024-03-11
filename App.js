@@ -7,6 +7,7 @@ import Sobre from "./src/screens/Sobre";
 import Privacidade from "./src/screens/Privacidade";
 import BuscarFilmes from "./src/screens/BuscarFilmes";
 import Resultados from "./src/screens/Resultados";
+import Detalhes from "./src/screens/Detalhes";
 
 // Criação/inicialização do mecanismo Stack
 const Stack = createNativeStackNavigator();
@@ -44,6 +45,7 @@ export default function App() {
           />
 
           <Stack.Screen name="Resultados" component={Resultados} />
+          <Stack.Screen name="Detalhes" component={Detalhes} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
