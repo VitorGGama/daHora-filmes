@@ -8,7 +8,7 @@ import {
 import React from "react";
 import SafeContainer from "../components/SafeContainer";
 import imagemAlternativa from "../../assets/images/foto-alternativa.jpg";
-import moment from "moment";
+import moment from "moment"; /* Biblioteca para data brasileira*/
 
 export default function Detalhes({ route }) {
   const { filme } = route.params;
