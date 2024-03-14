@@ -20,7 +20,10 @@ export default function Home({ navigation }) {
             <Ionicons name="search" size={12} color="white" /> Buscar Filmes
           </Text>
         </Pressable>
-        <Pressable style={estilos.botao}>
+        <Pressable
+          style={estilos.botao}
+          onPress={() => navigation.navigate("Favoritos")}
+        >
           <Text style={estilos.textoBotao}>
             <Ionicons name="star" size={12} color="gold" /> Favoritos
           </Text>

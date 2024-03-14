@@ -6,6 +6,8 @@ Exemplo de app nativo multiplataforma criado com React Native e Expo.
 
 - Criação da tela `Detalhes.js` e adição dela à `Stack` em `App.js`
 - Em `CardFilme`, utilização do hook `useNavigation` para funcionalidade de navegação do botão **Leia mais**.
+- Em `App.js` na `Stack.Screen Detalhes`, adicionamos uma prop `options`
+  configurada para exibir um `Button` responsável por permitir a navegação direta para `Home`.
 
 ## Branch 07-melhorias-nos-resultados
 
