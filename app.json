@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Dá Hora Filmes",
-    "slug": "dahora-filmes",
+    "slug": "da-hora-filmes",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/dahora.png",
@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-dahora.png",
         "backgroundColor": "#000000"
-      }
+      },
+      "package": "com.vitor_gama1980.dahorafilmes"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "85d9aa58-9425-48ef-a77f-7cd41cfacf8f"
+      }
+    },
+    "owner": "vitor_gama1980"
   }
 }

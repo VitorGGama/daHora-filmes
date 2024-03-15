@@ -46,6 +46,7 @@ export default function Favoritos({ navigation }) {
             const novosFavoritos = listaFavoritos.filter(
               (exclui, i) => i !== index
             );
+
             setListaFavoritos(novosFavoritos);
 
             // Atualiza o AsyncStorage
