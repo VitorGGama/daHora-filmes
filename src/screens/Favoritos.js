@@ -1,4 +1,4 @@
-// src/screens/Sobre.js
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Pressable,
@@ -7,18 +7,13 @@ import {
   Text,
   View,
 } from "react-native";
-import SafeContainer from "../components/SafeContainer";
-
-import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
+import SafeContainer from "../components/SafeContainer";
 
 export default function Favoritos({ navigation }) {
-  /* State para registrar os dados carregados do storage*/
   const [listaFavoritos, setListaFavoritos] = useState([]);
 
-  /* useEffect será disparado assim que o usário entrar
-  na tela Favoritos (portanto, somente uma vez) */
   useEffect(() => {
     const carregarFavoritos = async () => {
       try {
@@ -34,6 +29,36 @@ export default function Favoritos({ navigation }) {
     carregarFavoritos();
   }, []);
 
+  const excluirUmFilme = async (index) => {
+    Alert.alert(
+      "Excluir item",
+      "Tem certeza que deseja excluir este filme dos favoritos?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Sim, excluir",
+          style: "destructive",
+          onPress: async () => {
+            // Remove o item do estado
+            const novosFavoritos = listaFavoritos.filter(
+              (exclui, i) => i !== index
+            );
+            setListaFavoritos(novosFavoritos);
+
+            // Atualiza o AsyncStorage
+            await AsyncStorage.setItem(
+              "@favoritosvitor",
+              JSON.stringify(novosFavoritos)
+            );
+          },
+        },
+      ]
+    );
+  };
+
   const excluirTodosFavoritos = async () => {
     Alert.alert(
       "Excluir TODOS?",
@@ -46,47 +71,58 @@ export default function Favoritos({ navigation }) {
         {
           text: "Sim, manda ver",
           style: "destructive",
+          onPress: async () => {
+            //Removemos nosso storage de favoritos
+            await AsyncStorage.removeItem("@favoritosvitor");
+
+            //Atualizamos o storage para que sejam removidos da tela
+            setListaFavoritos([]);
+          },
         },
       ]
     );
   };
+
   return (
     <SafeContainer>
       <View style={estilos.subContainer}>
         <View style={estilos.viewFAvoritos}>
           <Text style={estilos.texto}>Quantidade:{listaFavoritos.length} </Text>
-          <Pressable
-            onPress={excluirTodosFavoritos}
-            style={estilos.botaoExcluirFavoritos}
-          >
-            <Text style={estilos.textoBotao}>
-              <Ionicons name="trash-outline" size={16} />
-              Excluir favoritos
-            </Text>
-          </Pressable>
+          {listaFavoritos.length > 0 && (
+            <Pressable
+              onPress={excluirTodosFavoritos}
+              style={estilos.botaoExcluirFavoritos}
+            >
+              <Text style={estilos.textoBotao}>
+                <Ionicons name="trash-outline" size={16} />
+                Excluir favoritos
+              </Text>
+            </Pressable>
+          )}
         </View>
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          {listaFavoritos.map((filme) => {
-            return (
-              <View key={filme.id} style={estilos.item}>
-                <Pressable
-                  onPress={() => {
-                    navigation.navigate("Detalhes", { filme });
-                  }}
-                  style={estilos.botaoFilme}
-                >
-                  <Text style={estilos.titulo}>{filme.title}</Text>
-                </Pressable>
+          {listaFavoritos.map((filme, index) => (
+            <View key={filme.id} style={estilos.item}>
+              <Pressable
+                onPress={() => {
+                  navigation.navigate("Detalhes", { filme });
+                }}
+                style={estilos.botaoFilme}
+              >
+                <Text style={estilos.titulo}>{filme.title}</Text>
+              </Pressable>
 
-                <Pressable style={estilos.botaoExcluir}>
-                  <Text>
-                    <Ionicons color="white" name="trash" size={16} />
-                  </Text>
-                </Pressable>
-              </View>
-            );
-          })}
+              <Pressable
+                onPress={() => excluirUmFilme(index)}
+                style={estilos.botaoExcluir}
+              >
+                <Text>
+                  <Ionicons color="white" name="trash" size={16} />
+                </Text>
+              </Pressable>
+            </View>
+          ))}
         </ScrollView>
       </View>
     </SafeContainer>
@@ -108,14 +144,13 @@ const estilos = StyleSheet.create({
     alignItems: "center",
     marginBottom: 8,
   },
-  texto: { marginVertical: 8 },
+  textoBotao: { color: "red" },
   botaoExcluirFavoritos: {
     borderWidth: 1,
     borderColor: "red",
     padding: 8,
     borderRadius: 4,
   },
-  textoBotao: { color: "red" },
   item: {
     padding: 8,
     flexDirection: "row",
