@@ -35,7 +35,7 @@ export default function Favoritos({ navigation }) {
       "Tem certeza que deseja excluir este filme dos favoritos?",
       [
         {
-          text: "Cancelar",
+          text: "Desistir",
           style: "cancel",
         },
         {
@@ -65,7 +65,7 @@ export default function Favoritos({ navigation }) {
       "Tem certeza que deseja excluir todos os favoritos",
       [
         {
-          text: "Cancelar",
+          text: "Desistir",
           style: "cancel", //verificar
         },
         {
